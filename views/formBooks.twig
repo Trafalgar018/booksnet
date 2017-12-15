@@ -1,0 +1,79 @@
+{% extends "layout.twig" %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ '' | url }}css/bootstrap-tokenfield.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ webInfo.h1 }}</h1>
+    <form method="post">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group  {%  if errors['title'] %}has-error{% endif %}">
+                    <label for="inputTitle">Title</label>
+                    <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Book Title" value="{{ book.title}}">
+                </div>
+                {{ generateAlert(errors, 'title') }}
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group {% if errors['author'] %}has-error{% endif %}">
+                    <label for="inputAuthor">Author</label>
+                    <input type="text" class="form-control" id="inputAuthor" name="author"  placeholder="Author name" value="{{ book.author }}" />
+                </div>
+                {{ generateAlert(errors, 'author') }}
+            </div>
+
+
+
+            <div class="col-lg-3">
+                <div class="form-group {% if errors['publication'] %}has-error{% endif %}">
+                    <label for="inputPublication">Publication Date</label>
+                    <input type="date" class="form-control" id="inputPublication" name="publication" value="{{ book.publication }}">
+                </div>
+                {{ generateAlert(errors, 'publication') }}
+            </div>
+
+
+            <div class="col-lg-3">
+                <div class="form-group {% if errors['genre'] %}has-error{% endif %}">
+                    <label for="inputGenre">Genre</label>
+                    <input type="text" class="form-control" id="inputGenre" name="genre" placeholder="Genre" value="{{ book.genre }}">
+                </div>
+                {{ generateAlert(errors, 'genre') }}
+            </div>
+
+            <div class="col-lg-3">
+                <div class="form-group {% if errors['image'] %}has-error{% endif %}">
+                    <label for="inputImage">Image</label>
+                    <input type="text" class="form-control" id="inputImage" name="image" placeholder="Cover Image URL" value="{{ book.image }}">
+                </div>
+                {{ generateAlert(errors, 'genre') }}
+            </div>
+
+        </div>
+
+
+        <div class="form-group {% if errors['description'] %}has-error{% endif %}">
+            <label for="inputDescription">Description</label>
+            <textarea class="form-control" name="description" id="inputDescription" rows="5">{{ distro.description }}</textarea>
+        </div>
+        {{ generateAlert(errors, 'description') }}
+
+        <input type="hidden" name="_method" value="{{ webInfo.method }}">
+        <button type="submit" class="btn btn-default">{{ webInfo.submit }}</button>
+    </form>
+</div><!-- /.container -->
+{% endblock %}
+
+{% block js %}
+    <script src="{{ '' | url }}js/bloodhound/bloodhound.js"></script>
+    <script src="{{ '' | url }}js/typehead/typehead.js"></script>
+    <script src="{{ '' | url }}js/tokenfield/bootstrap-tokenfield.min.js"></script>
+    <script src="{{ '' | url }}js/tokenfield/tokenfield-distroada.js"></script>
+{% endblock %}
