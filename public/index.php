@@ -71,6 +71,8 @@ $router->group(['before' => 'noAuth'], function ($router){
     $router->post('/login', ['\App\Controllers\HomeController', 'postLogin']);
     $router->get('/registro', ['\App\Controllers\HomeController', 'getRegistro']);
     $router->post('/registro', ['\App\Controllers\HomeController', 'postRegistro']);
+    $router->get('/invitaciones', ['\App\Controllers\HomeController', 'getInvitaciones']);
+    $router->post('/invitaciones', ['\App\Controllers\HomeController', 'postInvitaciones']);
 });
 
 // Rutas sin filtros

@@ -28,15 +28,19 @@ class AuthController extends BaseController {
         $validator->add('password:Password','required',[],"El campo {label} es requerido");
         if ($validator->validate($_POST)){
             $user = User::where('email',$_POST['email'])->first();
-            if (password_verify($_POST['password'],$user->password)){
-                $_SESSION['userId'] = $user->id;
-                $_SESSION['userName'] = $user->name;
-                $_SESSION['userEmail'] = $user->email;
-                header('Location: '. BASE_URL);
-                return null;
+            if(!is_null($user)) {
+                if (password_verify($_POST['password'], $user->password)) {
+                    $_SESSION['userId'] = $user->id;
+                    $_SESSION['userName'] = $user->name;
+                    $_SESSION['userEmail'] = $user->email;
+                    header('Location: ' . BASE_URL);
+                    return null;
+                }
+
             }
-            $validator->addMessage('authError','Los datos son incorrectos');
-        }
+                $validator->addMessage('authError', 'Los datos son incorrectos');
+
+            }
         //todo LOGS
         return $this->render('auth/login.twig',[
             'errors' => $validator->getMessages()

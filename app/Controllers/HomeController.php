@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Controllers\Auth\AuthController;
 use App\Controllers\Auth\RegisterController;
 use App\Models\Book;
+use App\Models\Invitacion;
 use App\Models\User;
 
 class HomeController extends BaseController {
@@ -59,6 +60,18 @@ class HomeController extends BaseController {
             'title' => $route
         ];
         return $this->render("404.twig",[$webInfo]);
+    }
+
+    public function getInvitaciones(){
+        $invitaciones = new InvitacionesController();
+
+        return $invitaciones->getInvitacion();
+    }
+
+    public function postInvitaciones(){
+        $invitaciones = new InvitacionesController();
+
+        return $invitaciones->postInvitaciones();
     }
 }
 
